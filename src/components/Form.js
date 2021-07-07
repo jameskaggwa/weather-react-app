@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { TextField, Button, Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,29 +12,54 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
         width: '25ch',
     },
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: theme.spacing(3),
+        marginTop: theme.spacing(3)
+    }
 }));
 
-export default function LayoutTextFields() {
+export default function WeatherForm({ dataOn, setDataOn, place, setPlace }) {
     const classes = useStyles();
+    const handleChange = () => {
+
+        setInterval(setDataOn(!dataOn), 10000)
+    }
+    const handlePlace = (e) => {
+        setPlace(e.target.value)
+    }
 
     return (
-        <div className={classes.root}>
-            <div>
+        <Container className={classes.container}>
+            <div className={classes.root}>
+                <div>
 
-                <TextField
-                    id="standard-full-width"
-                    label="Label"
-                    style={{ margin: 8 }}
-                    placeholder="Placeholder"
-                    helperText="Full width!"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
+                    <TextField
+                        onChange={handlePlace}
+                        id="standard-full-width"
+                        label="City or Country"
+                        style={{ margin: 8 }}
+                        placeholder="Write here"
+                        helperText="city name or country!"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <span>
 
+                        <Button onClick={handleChange} variant="contained" color="primary" href="#contained-buttons">
+                            Get Weather
+                        </Button>
+
+                    </span>
+
+
+                </div>
             </div>
-        </div>
+        </Container>
     );
 }

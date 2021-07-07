@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Cloud } from '@material-ui/icons';
+import BackgroundSwitch from './BackgroundSwitch';
+import Spinner from './Spinner';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,10 +18,11 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        marginLeft: theme.spacing(1),
     },
 }));
 
-export default function NavBar() {
+export default function NavBar({ bgOn, setBgOn, dataOn, setDataOn }) {
     const classes = useStyles();
 
     return (
@@ -27,12 +30,14 @@ export default function NavBar() {
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <Cloud />
+                        {dataOn ? <Cloud /> : <Spinner />}
+
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         Weather App
                     </Typography>
-                    <Button color="inherit">Login</Button>
+
+                    <BackgroundSwitch bgOn={bgOn} setBgOn={setBgOn} />
                 </Toolbar>
             </AppBar>
         </div>
