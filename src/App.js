@@ -6,7 +6,7 @@ import ParticlesBg from 'particles-bg'
 import WeatherForm from './components/Form';
 import WeatherCard from './components/WeatherCard';
 import { Grid, makeStyles } from '@material-ui/core';
-import axios from 'axios';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,25 +23,22 @@ function App() {
   const [isLoading, setisLoading] = useState(false);
   const [data, setData] = useState(null)
   const [place, setPlace] = useState('kampala')
-  const [showCard, setShowCard] = useState(false);
+  // const [showCard, setShowCard] = useState(false);
 
   //  fetching data
 
   useEffect(() => {
     // setisLoading(true)
-    // loadData(place);
-    // setisLoading(false)
-    console.log('am geting data ...')
-
-  }, [isLoading]);
+    loadData();
+  });
 
 
-  const loadData = async (place) => {
+  const loadData = async () => {
     const key = "7bbb36f27712361729c5a0cd6eb0046d";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${key}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data)
+    setData(data)
   }
 
 
@@ -57,7 +54,7 @@ function App() {
       </Grid>
 
       <Grid item xs={12} md={6} className={classes.container} >
-        {isLoading ? <WeatherCard logo={logo} /> : <span></span>}
+        {isLoading ? <WeatherCard data={data} logo={logo} /> : <span></span>}
       </Grid>
 
       {/* <Grid item xs={12} md={6} className={classes.container} >
