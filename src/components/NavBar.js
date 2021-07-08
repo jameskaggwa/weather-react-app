@@ -29,7 +29,7 @@ export default function NavBar({ bgOn, setBgOn, isLoading, setisLoading }) {
 
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Weather App
+                        Weather App.Js
                     </Typography>
 
                     <BackgroundSwitch bgOn={bgOn} setBgOn={setBgOn} />
