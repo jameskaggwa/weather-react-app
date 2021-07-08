@@ -20,20 +20,25 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [bgOn, setBgOn] = useState(false);
-  const [dataOn, setDataOn] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  const [data, setData] = useState(null)
   const [place, setPlace] = useState('kampala')
+  const [showCard, setShowCard] = useState(false);
 
   //  fetching data
+
   useEffect(() => {
-    loadData();
+    // setisLoading(true)
+    // loadData(place);
+    // setisLoading(false)
+    console.log('am geting data ...')
 
-  }, []);
+  }, [isLoading]);
 
 
-  const key = "7bbb36f27712361729c5a0cd6eb0046d";
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${key}`;
-
-  const loadData = async () => {
+  const loadData = async (place) => {
+    const key = "7bbb36f27712361729c5a0cd6eb0046d";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${key}`;
     const res = await fetch(url);
     const data = await res.json();
     console.log(data)
@@ -44,19 +49,19 @@ function App() {
     <Grid container>
 
       <Grid item xs={12}>
-        <NavBar bgOn={bgOn} dataOn={dataOn} setDataOn={setDataOn} setBgOn={setBgOn} />
+        <NavBar bgOn={bgOn} isLoading={isLoading} setisLoading={setisLoading} setBgOn={setBgOn} />
       </Grid>
 
       <Grid item xs={12} md={6}  >
-        <WeatherForm dataOn={dataOn} place={place} setPlace={setPlace} setDataOn={setDataOn} />
+        <WeatherForm isLoading={isLoading} place={place} setPlace={setPlace} setisLoading={setisLoading} />
       </Grid>
 
       <Grid item xs={12} md={6} className={classes.container} >
-        {dataOn ? <WeatherCard logo={logo} /> : <span></span>}
+        {isLoading ? <WeatherCard logo={logo} /> : <span></span>}
       </Grid>
 
       {/* <Grid item xs={12} md={6} className={classes.container} >
-        {dataOn ? : <span></span>}
+        {isLoading ? : <span></span>}
       </Grid> */}
 
       {bgOn ? <ParticlesBg type="circle" bg={true} /> : <span></span>}

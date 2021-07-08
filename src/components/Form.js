@@ -16,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: theme.spacing(3),
+        marginBottom: theme.spacing(3), 
         marginTop: theme.spacing(3)
     }
 }));
 
-export default function WeatherForm({ dataOn, setDataOn, place, setPlace }) {
+export default function WeatherForm({ isLoading, setisLoading, place, setPlace }) {
     const classes = useStyles();
     const handleChange = () => {
 
-        setInterval(setDataOn(!dataOn), 10000)
+
     }
     const handlePlace = (e) => {
         setPlace(e.target.value)

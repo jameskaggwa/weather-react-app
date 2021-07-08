@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NavBar({ bgOn, setBgOn, dataOn, setDataOn }) {
+export default function NavBar({ bgOn, setBgOn, isLoading, setisLoading }) {
     const classes = useStyles();
 
     return (
@@ -30,7 +30,7 @@ export default function NavBar({ bgOn, setBgOn, dataOn, setDataOn }) {
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        {dataOn ? <Cloud /> : <Spinner />}
+                        {isLoading ? <Spinner /> : <Cloud />}
 
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
