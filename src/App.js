@@ -25,19 +25,6 @@ function App() {
   const [submit, setSubmit] = useState(false);
   const [showCard, setShowCard] = useState(false);
 
-  //  fetching data
-
-  useEffect(() => {
-    if (submit) {
-      console.log(place);
-      loadData();
-
-
-
-    }
-
-
-  }, [submit]);
 
 
   const loadData = async () => {
@@ -51,6 +38,19 @@ function App() {
     setPlace('')
     setSubmit(false)
   }
+
+  //  fetching data
+
+  useEffect(() => {
+    if (submit) {
+      console.log(place);
+      loadData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submit]);
+
+
+
 
 
   return (
