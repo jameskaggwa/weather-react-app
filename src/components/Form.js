@@ -16,15 +16,20 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: theme.spacing(3), 
+        marginBottom: theme.spacing(3),
         marginTop: theme.spacing(3)
     }
 }));
 
-export default function WeatherForm({ isLoading, setisLoading, place, setPlace }) {
+export default function WeatherForm({ place, setPlace, submit, setSubmit }) {
     const classes = useStyles();
     const handleChange = () => {
 
+        if (place === '') {
+            console.log('cant be empty string');
+        } else {
+            setSubmit(true);
+        }
 
     }
     const handlePlace = (e) => {
@@ -37,6 +42,7 @@ export default function WeatherForm({ isLoading, setisLoading, place, setPlace }
                 <div>
 
                     <TextField
+                        value={place}
                         onChange={handlePlace}
                         id="standard-full-width"
                         label="City or Country"
@@ -51,7 +57,7 @@ export default function WeatherForm({ isLoading, setisLoading, place, setPlace }
                     />
                     <span>
 
-                        <Button onClick={handleChange} variant="contained" color="primary" href="#contained-buttons">
+                        <Button onClick={handleChange} variant="outlined">
                             Get Weather
                         </Button>
 

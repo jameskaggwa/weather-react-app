@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NavBar({ bgOn, setBgOn, isLoading, setisLoading }) {
+export default function NavBar({ bgOn, setBgOn, submit, setSubmit }) {
     const classes = useStyles();
 
     return (
@@ -25,11 +25,11 @@ export default function NavBar({ bgOn, setBgOn, isLoading, setisLoading }) {
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        {isLoading ? <Spinner /> : <Cloud />}
+                        {submit ? <Spinner /> : <Cloud />}
 
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Weather App.Js
+                        Weather App
                     </Typography>
 
                     <BackgroundSwitch bgOn={bgOn} setBgOn={setBgOn} />

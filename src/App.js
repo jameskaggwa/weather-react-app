@@ -20,17 +20,24 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [bgOn, setBgOn] = useState(false);
-  const [isLoading, setisLoading] = useState(false);
-  const [data, setData] = useState(null)
-  const [place, setPlace] = useState('kampala')
-  // const [showCard, setShowCard] = useState(false);
+  const [data, setData] = useState(null);
+  const [place, setPlace] = useState('');
+  const [submit, setSubmit] = useState(false);
+  const [showCard, setShowCard] = useState(false);
 
   //  fetching data
 
   useEffect(() => {
-    // setisLoading(true)
-    loadData();
-  });
+    if (submit) {
+      console.log(place);
+      loadData();
+
+
+
+    }
+
+
+  }, [submit]);
 
 
   const loadData = async () => {
@@ -39,6 +46,10 @@ function App() {
     const res = await fetch(url);
     const data = await res.json();
     setData(data)
+    console.log(data);
+    setShowCard(true)
+    setPlace('')
+    setSubmit(false)
   }
 
 
@@ -46,19 +57,19 @@ function App() {
     <Grid container>
 
       <Grid item xs={12}>
-        <NavBar bgOn={bgOn} isLoading={isLoading} setisLoading={setisLoading} setBgOn={setBgOn} />
+        <NavBar bgOn={bgOn} submit={submit} setSubmit={setSubmit} setBgOn={setBgOn} />
       </Grid>
 
       <Grid item xs={12} md={6}  >
-        <WeatherForm isLoading={isLoading} place={place} setPlace={setPlace} setisLoading={setisLoading} />
+        <WeatherForm submit={submit} setSubmit={setSubmit} place={place} setPlace={setPlace} />
       </Grid>
 
       <Grid item xs={12} md={6} className={classes.container} >
-        {isLoading ? <WeatherCard data={data} logo={logo} /> : <span></span>}
+        {showCard ? <WeatherCard data={data} logo={logo} /> : <span></span>}
       </Grid>
 
       {/* <Grid item xs={12} md={6} className={classes.container} >
-        {isLoading ? : <span></span>}
+        {submit ? : <span></span>}
       </Grid> */}
 
       {bgOn ? <ParticlesBg type="circle" bg={true} /> : <span></span>}

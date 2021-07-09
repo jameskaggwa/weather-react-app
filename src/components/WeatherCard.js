@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function WeatherCard({ logo }) {
+export default function WeatherCard({ logo, data }) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -59,7 +59,7 @@ export default function WeatherCard({ logo }) {
                 <CardHeader
                     avatar={
                         <Avatar aria-label="recipe" className={classes.avatar}>
-                            R
+                            {data.sys.country}
                         </Avatar>
                     }
                     action={
@@ -67,8 +67,8 @@ export default function WeatherCard({ logo }) {
                             <MoreVertIcon />
                         </IconButton>
                     }
-                    title="Shrimp and Chorizo Paella"
-                    subheader="September 14, 2016"
+                    title={data.name}
+                    subheader={data.weather[0].main}
                 />
                 <CardMedia
                     className={classes.media}
@@ -77,8 +77,7 @@ export default function WeatherCard({ logo }) {
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        This impressive paella is a perfect party dish and a fun meal to cook together with your
-                        guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                        There is going to be {data.weather[0].main} today in {data.name}.
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
